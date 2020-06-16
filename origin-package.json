@@ -4,20 +4,23 @@
   "description": "Mi primer proyecto Mongo Express Vue Nodejs",
   "main": "index.js",
   "scripts": {
-    "start": "babel-node index.js --exec",
     "dev": "nodemon index.js --exec babel-node"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pedRoot/mevn.git"
   },
   "dependencies": {
     "connect-history-api-fallback": "^1.6.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
     "@babel/cli": "^7.10.1",
     "@babel/core": "^7.10.2",
     "@babel/node": "^7.10.1",
     "@babel/preset-env": "^7.10.2",
-    "morgan": "^1.10.0"
-  },
-  "devDependencies": {
     "nodemon": "^2.0.4"
   },
   "keywords": [],
@@ -25,5 +28,6 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/pedRoot/mevn/issues"
-  }
+  },
+  "homepage": "https://github.com/pedRoot/mevn#readme"
 }
