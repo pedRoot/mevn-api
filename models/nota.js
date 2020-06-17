@@ -10,4 +10,5 @@ const notaSchema = new Schema({
 });
 
 const Nota  = mongoose.model('Nota', notaSchema);
+
 export default Nota;
