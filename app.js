@@ -1,4 +1,4 @@
-import express from "express";
+const express = require("express");
 import logger from "morgan";
 import path from "path";
 import cors from "cors";
