@@ -2,7 +2,8 @@ import express from "express";
 import logger from "morgan";
 import path from "path";
 import cors from "cors";
-import mongoose from "mongoose";
+import properties from "./config/properties";
+import dbConnect from "./config/database"
 
 const app = express();
 
@@ -18,17 +19,11 @@ import history from  "connect-history-api-fallback";
 app.use(history());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.set("port", process.env.PORT || 8000);
+app.set("port", properties.PORT);
 const port = app.get("port");
 
 app.listen(port, () => {
-  console.log(`==> My app listing on http://localhost:${port}`);
+  console.log(properties.SUCCESS(`My app listing on http://localhost:${port}`));
 });
 
-const uri = 'mongodb://localhost:27017/mevn';
-const options = {useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true};
-
-mongoose.connect(uri, options).then(
-  () => {  console.log('==> Conectado a MongoDB')  },
-  err => { console.log(`==> Error al conectar con mongo ${err}`);}
-);
+dbConnect();
