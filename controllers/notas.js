@@ -1,91 +1,72 @@
 import Nota from "../models/nota";
 
 const create = async (req, res) => {
-
   const body = req.body;
 
-  try {
-
-    const newNota = await Nota.create(body);
-
+  await Nota.create(body, (err, nota) => {
+    if (err) return res.status(500).json({ err });
     res.json({
-      mensaje: "Nota creada correctamente",
-      nota: newNota
+      status: "Succesfull",
+      nota,
     });
-
-  } catch (error) {
-    return res.status(400).json({
-      mensaje: "Ocurrio un Error",
-      error
-    });
-  }
-}
+  });
+};
 
 const read = async (req, res) => {
   const _id = req.params.id;
 
-  try {
+  await Nota.findOne({ _id }, (err, nota) => {
+    if (err) return res.sataus(500).json({ err });
+    if (!nota)
+      return res
+        .status(404)
+        .json({ status: "error", message: "Record not found" });
 
-    const nota = await Nota.findOne({_id});
-    res.json({nota})
-
-  } catch (error) {
-    return res.status(400).json({
-      mensaje: "Ocurrio un Error",
-      error
-    });
-  }
-
-}
+    res.json({ status: "successfull", nota });
+  });
+};
 const list = async (req, res) => {
-  try {
+  await Nota.find({}, (err, notas) => {
+    if (err) return res.status(500).json({ err });
+    if (!notas)
+      return res.status(404).json({ status: "error", message: "Not records" });
 
-    const notas = await Nota.find();
-    res.json({notas})
-
-  } catch (error) {
-    return res.status(400).json({
-      mensaje: "Ocurrio un Error",
-      error
-    });
-  }
-}
+    res.json({ status: "successfull", notas });
+  });
+};
 const destroy = async (req, res) => {
   const _id = req.params.id;
 
-  try {
+  await Nota.findByIdAndDelete({ _id }, (err, nota) => {
+    if (err) return res.status(500).json({ err });
+    if (!nota)
+      return res
+        .status(404)
+        .json({ status: "error", message: "Record not found" });
 
-    const nota = await Nota.findByIdAndDelete({_id});
-    res.json({nota});
+    res.json({ status: "successfull", nota });
+  });
+};
 
-  } catch (error) {
-    return res.status(400).json({
-      mensaje: "Ocurrio un Error",
-      error
-    });
-  }
-}
 const update = async (req, res) => {
   const _id = req.params.id;
   const body = req.body;
 
-  try {
+  await Nota.findByIdAndUpdate(_id, body, { new: true }, (err, nota) => {
+    if (err) return res.status(500).json({ err });
+    if (!nota)
+      return res
+        .status(404)
+        .json({ status: "error", message: "Record not found" });
 
-    const nota = await Nota.findByIdAndUpdate(_id,body, {new: true});
-    res.json({nota});
-
-  } catch (error) {
-    return res.status(400).json({
-      mensaje: "Ocurrio un Error",
-      error
-    });
-  }
-}
+    res.json({ status: "successfull", nota });
+  });
+};
 
 module.exports = {
   create,
   read,
   list,
   destroy,
-  update
-}
+  update,
+};

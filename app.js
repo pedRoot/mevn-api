@@ -2,8 +2,9 @@ import express from "express";
 import logger from "morgan";
 import path from "path";
 import cors from "cors";
+
 import properties from "./config/properties";
-import dbConnect from "./config/database"
+import connectDB from "./config/database";
 
 const app = express();
 
@@ -11,7 +12,6 @@ app.use(logger("tiny"));
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-
 app.use("/api", require("./routes/nota.js"));
 
 // Todo este bloque debe estar junto y debajo de las rutas
@@ -26,4 +26,4 @@ app.listen(port, () => {
   console.log(properties.SUCCESS(`My app listing on http://localhost:${port}`));
 });
 
-dbConnect();
+connectDB();
