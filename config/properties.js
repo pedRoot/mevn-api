@@ -1,9 +1,9 @@
 const chalk = require("chalk");
-const variblesEnv =  process.env
+const env =  process.env
 
 module.exports = {
-  PORT: variblesEnv.PORT,
-  DB: variblesEnv.DB,
+  PORT: env.PORT,
+  DB: env.DB,
   CONNECTED: chalk.bold.cyan,
   ERROR: chalk.bold.red,
   TERMINATION: chalk.bold.magenta,
