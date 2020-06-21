@@ -3,7 +3,7 @@ import { create, read, list, destroy, update } from "../controllers/notas";
 
 const router = express.Router();
 
-router.post("/nueva-nota", create);
+router.post("/nota", create);
 router.get("/nota/:id", read);
 router.get("/notas", list);
 router.delete("/nota/:id", destroy);
