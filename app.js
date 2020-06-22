@@ -15,7 +15,7 @@ app.use(express.urlencoded({extended: true}));
 app.use("/api", require("./routes/nota.js"));
 
 // Todo este bloque debe estar junto y debajo de las rutas
-import history from  "connect-history-api-fallback";
+import history from "connect-history-api-fallback";
 app.use(history());
 app.use(express.static(path.join(__dirname, "public")));
 
